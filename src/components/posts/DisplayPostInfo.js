@@ -3,7 +3,7 @@ import Image from 'next/image';
 const DisplayPostInfo = ({ news }) => {
   return (
     <div className="py-1 mx-2">
-      <div className="bg-white dark:bg-gray-600 sm:grid sm:grid-cols-8 gap-5 py-6 px-2 rounded-md">
+      <div className="bg-sky-50 dark:bg-gray-600 sm:grid sm:grid-cols-8 gap-5 py-6 px-2 rounded-md">
         <div className="sm:col-span-1 mx-auto flex justify-center">
           <Image
             src={news.image.imageurl}

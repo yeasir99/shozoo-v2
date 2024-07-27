@@ -1,4 +1,5 @@
 import DescWrapper from '@/components/posts/DescWrapper';
+
 import posts from '@/data/posts';
 import DisplayPostDesc from '@/components/posts/DisplayPostDesc ';
 

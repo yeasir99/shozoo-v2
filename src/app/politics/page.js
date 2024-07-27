@@ -9,7 +9,7 @@ const page = () => {
     <InfoWrapper>
       {posts &&
         posts.map(item => (
-          <Link href={`business/${item._id}`} key={item._id}>
+          <Link href={`politics/${item._id}`} key={item._id}>
             <DisplayPostInfo news={item} />
           </Link>
         ))}
