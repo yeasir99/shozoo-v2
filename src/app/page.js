@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <main>
       <div className="relative h-screen">
-        <div className="absolute z-[1000] top-0 left-0 max-w-screen w-full bg-gray-200/50">
+        <div className="absolute z-[1000] top-0 left-0 max-w-screen w-full bg-sky-600/80 dark:bg-gray-800/80">
           <div className="max-w-[1300px] mx-auto">
             <Nav />
           </div>

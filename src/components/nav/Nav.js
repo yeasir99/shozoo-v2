@@ -56,7 +56,7 @@ const Nav = () => {
       <div
         className={`${
           menuOpen ? '' : 'hidden'
-        } absolute right-0 top-14 bg-white dark:bg-gray-700 w-52 py-5 rounded-md z-50`}
+        } absolute right-0 top-14 bg-sky-600 dark:bg-gray-700 w-52 py-5 rounded-md z-50`}
       >
         <Link href="/business" className={clasess}>
           business
@@ -75,6 +75,9 @@ const Nav = () => {
         </Link>
         <Link href="/opinion" className={clasess}>
           opinion
+        </Link>
+        <Link href="/login" className={clasess}>
+          Login
         </Link>
       </div>
     </div>
