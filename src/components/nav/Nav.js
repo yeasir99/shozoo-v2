@@ -79,6 +79,9 @@ const Nav = () => {
         <Link href="/login" className={clasess}>
           Login
         </Link>
+        <Link href="/sign-up" className={clasess}>
+          Sign up
+        </Link>
       </div>
     </div>
   );

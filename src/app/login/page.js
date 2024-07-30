@@ -15,11 +15,14 @@ const page = () => {
     console.log(credentials);
   };
   const handleChange = e => {
-    console.log(e.target.value);
+    setCredentials(prevState => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
   return (
     <div>
-      <div className="bg-sky-100 dark:bg-black">
+      <div className="bg-blue-600 dark:bg-black">
         <div className="max-w-[1400px] mx-auto">
           <Nav />
         </div>
@@ -40,9 +43,11 @@ const page = () => {
               <input
                 type="email"
                 id="email"
+                name="email"
                 className="block w-full text-gray-700  rounded-lg  mb-3 leading-tight focus:outline-none focus:bg-gray-50 focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 onChange={handleChange}
                 placeholder="Email"
+                required
               />
             </div>
             <div>
@@ -55,9 +60,11 @@ const page = () => {
               <input
                 type="password"
                 id="password"
+                name="password"
                 className="block w-full text-gray-700  rounded-lg  mb-3 leading-tight focus:outline-none focus:bg-gray-50 focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 onChange={handleChange}
                 placeholder="Password"
+                required
               />
             </div>
             <div className="flex justify-end">
@@ -71,7 +78,10 @@ const page = () => {
             <div className="pt-4">
               <p className="font-bold text-lg">
                 Don't have account?{' '}
-                <Link href="/sign-up" className="text-blue-800">
+                <Link
+                  href="/sign-up"
+                  className="text-blue-800 dark:text-blue-400 underline"
+                >
                   Sign up
                 </Link>{' '}
               </p>
