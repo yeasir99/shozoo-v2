@@ -4,15 +4,24 @@ import Nav from '@/components/nav/Nav';
 import Footer from '@/components/Footer';
 import { useState } from 'react';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 const page = () => {
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
   });
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log(credentials);
+    if (!credentials.email || !credentials.password) return;
+    try {
+      const res = await signIn('credentials', {
+        ...credentials,
+      });
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleChange = e => {
     setCredentials(prevState => ({

@@ -9,10 +9,7 @@ const page = () => {
     email: '',
     password: '',
   });
-  const handleSubmit = e => {
-    e.preventDefault();
-    console.log(credentials);
-  };
+
   const handleChange = e => {
     setCredentials(prevState => ({
       ...prevState,
@@ -31,7 +28,11 @@ const page = () => {
           <h1 className="text-center text-black dark:text-white text-2xl font-bold py-3">
             Sign Up For Account
           </h1>
-          <form className="w-full max-w-md m-auto" onSubmit={handleSubmit}>
+          <form
+            className="w-full max-w-md m-auto"
+            action="/api/sign-up"
+            method="post"
+          >
             <div>
               <label
                 htmlFor="name"
