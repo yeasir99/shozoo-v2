@@ -1,26 +1,58 @@
 import NextAuth from 'next-auth/next';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import User from '../../../../../models/user';
+import bcrypt from 'bcryptjs';
+import connectDB from '../../../../../config/connectDB';
 
-const authOptions = {
+export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: 'credentials',
+      name: 'Credentials',
       credentials: {},
 
       async authorize(credentials) {
         const { email, password } = credentials;
-        console.log(email, password);
-        const user = { id: 1433 };
-        return user;
+        try {
+          await connectDB();
+          const retriveUser = await User.findOne({ email });
+          if (!retriveUser) {
+            return null;
+          }
+          const passMatch = await bcrypt.compare(
+            password,
+            retriveUser.password
+          );
+          if (!passMatch) {
+            return null;
+          }
+
+          const user = {
+            id: retriveUser._id,
+            name: retriveUser.name,
+            email: retriveUser.email,
+            role: retriveUser.role,
+          };
+          return user;
+        } catch (error) {
+          console.log(error);
+        }
       },
     }),
   ],
+  callbacks: {
+    async session({ session }) {
+      await connectDB();
+      const user = await User.findOne({ email: session.user.email });
+      session.user.role = user.role;
+      return session;
+    },
+  },
   session: {
     strategy: 'jwt',
   },
-  secret: process.env.NEXT_SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/',
+    signIn: '/login',
   },
 };
 

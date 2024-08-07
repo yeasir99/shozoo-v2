@@ -1,0 +1,16 @@
+import Link from 'next/link';
+
+const AdminNav = () => {
+  return (
+    <div className="flex flex-col items-center gap-2 py-5">
+      <Link href="/admin/create-post" className="text-lg font-semibold">
+        Add post
+      </Link>
+      <Link href="/admin/headline" className="text-lg font-semibold">
+        Headline
+      </Link>
+    </div>
+  );
+};
+
+export default AdminNav;

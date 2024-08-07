@@ -6,8 +6,11 @@ import { MdOutlineMenu, MdOutlineClose } from 'react-icons/md';
 import ThemeSwitch from './ThemeSwitch';
 import BrandLogo from '@/data/images/brandLogo.png';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
 
 const Nav = () => {
+  const { data: session, status } = useSession();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const clasess =
     'flex flex-row items-center justify-center py-1 capitalize font-semibold hover:font-bold';
@@ -76,12 +79,23 @@ const Nav = () => {
         <Link href="/opinion" className={clasess}>
           opinion
         </Link>
-        <Link href="/login" className={clasess}>
-          Login
-        </Link>
-        <Link href="/sign-up" className={clasess}>
-          Sign up
-        </Link>
+        {status === 'authenticated' ? (
+          <Link
+            href={session?.user.role === 'user' ? '/user' : '/admin'}
+            className={clasess}
+          >
+            Dashboard
+          </Link>
+        ) : (
+          <>
+            <Link href="/login" className={clasess}>
+              Login
+            </Link>
+            <Link href="/sign-up" className={clasess}>
+              Sign up
+            </Link>
+          </>
+        )}
       </div>
     </div>
   );
