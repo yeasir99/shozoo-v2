@@ -44,6 +44,7 @@ export const authOptions = {
       await connectDB();
       const user = await User.findOne({ email: session.user.email });
       session.user.role = user.role;
+      session.user.id = user._id;
       return session;
     },
   },

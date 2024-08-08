@@ -6,7 +6,7 @@ import { MdOutlineMenu, MdOutlineClose } from 'react-icons/md';
 import ThemeSwitch from './ThemeSwitch';
 import BrandLogo from '@/data/images/brandLogo.png';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
+import { useSession, signOut } from 'next-auth/react';
 
 const Nav = () => {
   const { data: session, status } = useSession();
@@ -80,12 +80,20 @@ const Nav = () => {
           opinion
         </Link>
         {status === 'authenticated' ? (
-          <Link
-            href={session?.user.role === 'user' ? '/user' : '/admin'}
-            className={clasess}
-          >
-            Dashboard
-          </Link>
+          <>
+            <Link
+              href={session?.user.role === 'user' ? '/user' : '/admin'}
+              className={clasess}
+            >
+              Dashboard
+            </Link>
+            <div
+              className={`${clasess} cursor-pointer`}
+              onClick={() => signOut()}
+            >
+              Logout
+            </div>
+          </>
         ) : (
           <>
             <Link href="/login" className={clasess}>

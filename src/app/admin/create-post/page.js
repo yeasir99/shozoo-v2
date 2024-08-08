@@ -1,7 +1,8 @@
 import React from 'react';
+import CreatePostForm from '@/components/posts/CreatePostForm';
 
 const page = () => {
-  return <div>Create Post page</div>;
+  return <CreatePostForm />;
 };
 
 export default page;
