@@ -1,7 +1,7 @@
-import React from 'react';
+import DisplayAllPosts from '@/components/admin/DisplayAllPosts';
 
 const page = () => {
-  return <div>page</div>;
+  return <DisplayAllPosts />;
 };
 
 export default page;

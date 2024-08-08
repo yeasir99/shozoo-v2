@@ -89,6 +89,7 @@ const CreatePostForm = () => {
                 className="hidden"
                 name="description"
                 value={formData.description}
+                onChange={handleChange}
                 rows={0}
                 required
               />

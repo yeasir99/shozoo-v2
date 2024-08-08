@@ -22,10 +22,8 @@ export const POST = async request => {
     const description = formData.get('description');
     const category = formData.get('category');
     const image = formData.get('image');
-    const featured = formData.get('featured');
-    const viralPost = formData.get('viralPost');
-
-    console.log(description);
+    const featured = formData.get('featured') || false;
+    const viralPost = formData.get('viralPost') || false;
 
     // upload image to cloudinary
 

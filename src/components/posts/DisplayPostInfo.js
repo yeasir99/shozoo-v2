@@ -16,9 +16,9 @@ const DisplayPostInfo = ({ news }) => {
           <h1 className="text-xl font-bold mb-1 text-black dark:text-gray-100">
             {news.title}
           </h1>
-          <p className="text-gray-600 dark:text-sky-100 truncate">
+          {/* <p className="text-gray-600 dark:text-sky-100 truncate">
             {news.description}
-          </p>
+          </p> */}
         </div>
       </div>
     </div>
