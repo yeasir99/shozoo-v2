@@ -16,7 +16,7 @@ const DisplayAllPost = () => {
 
   if (posts.status === 'loading') {
     return (
-      <div className="text-center font-bold text-2xl py-10">Loading...</div>
+      <div className="text-center font-bold text-2xl py-10">Loading....</div>
     );
   }
 
