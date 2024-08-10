@@ -1,12 +1,34 @@
 'use client';
 import Image from 'next/image';
-const DisplayPostDesc = ({ news }) => {
+import { useState, useEffect } from 'react';
+import { getPost } from '@/utils/utils';
+import { useParams } from 'next/navigation';
+
+const DisplayPostDesc = () => {
+  const params = useParams();
+  const [news, setNews] = useState({
+    data: [],
+    status: 'loading',
+  });
+
+  useEffect(() => {
+    getPost(setNews, params.id);
+  }, []);
+
+  if (news.status === 'loading') {
+    return (
+      <div className="text-xl font-semibold text-center py-10 min-h-[80vh]">
+        Loading...
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-[1400px] mx-auto px-2">
       <div className="bg-sky-50 dark:bg-gray-600 rounded-md py-10">
         <div className="flex justify-center mb-10">
           <Image
-            src={news.image.imageurl}
+            src={news.data.image.imageurl}
             alt="main photo"
             width={600}
             height={600}
@@ -14,14 +36,15 @@ const DisplayPostDesc = ({ news }) => {
         </div>
         <div className="px-10 text-black">
           <h1 className="text-2xl font-bold mb-5 text-black dark:text-white">
-            {news.title}
+            {news.data.title}
           </h1>
-          <p className="text-lg text-black dark:text-sky-100">
-            {news.description}
-          </p>
+          <div
+            className="text-lg text-black dark:text-sky-100"
+            dangerouslySetInnerHTML={{
+              __html: news.data.description.replace(/ style="[^"]*"/g, ''),
+            }}
+          />
         </div>
-        {/* 👿👿👿👿👿come back and fix it😈😈😈😈 */}
-        {/* user interact like or dislike goes here */}
         <div>{/* comment goes here */}</div>
       </div>
     </div>

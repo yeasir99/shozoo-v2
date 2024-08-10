@@ -8,8 +8,6 @@ const page = () => {
     status: 'loading',
   });
 
-  console.log(headlines);
-
   useEffect(() => {
     getHeadlines(setHeadlines);
   }, []);

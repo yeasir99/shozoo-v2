@@ -16,7 +16,9 @@ const DisplayAllPost = () => {
 
   if (posts.status === 'loading') {
     return (
-      <div className="text-center font-bold text-2xl py-10">Loading....</div>
+      <div className="text-center font-bold text-2xl py-10 min-h-[80vh]">
+        Loading....
+      </div>
     );
   }
 
@@ -27,7 +29,9 @@ const DisplayAllPost = () => {
       </Link>
     ))
   ) : (
-    <div className="text-center font-bold text-2xl py-10">No Post To Show</div>
+    <div className="text-center font-bold text-2xl py-10 min-h-[80vh]">
+      No Post To Show
+    </div>
   );
 };
 

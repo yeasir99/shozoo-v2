@@ -44,12 +44,13 @@ const DisplayAllPosts = () => {
                 <h1 className="text-xl font-bold mb-2 text-black truncate">
                   {item.title}
                 </h1>
-                {/* <div
+                <div
                   className="truncate mb-2 text-black"
                   dangerouslySetInnerHTML={{
-                    __html: item.description,
+                    __html: item.description.replace(/ style="[^"]*"/g, '')
+                    .match(/<p[^>]*>(.*?)<\/p>/)[1]
                   }}
-                /> */}
+                />
                 <div className="text-2xl flex justify-end gap-2">
                   <div
                     className="bg-sky-500 px-2 py-2 rounded-full cursor-pointer"

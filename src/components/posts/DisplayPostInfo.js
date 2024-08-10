@@ -1,6 +1,7 @@
 import Image from 'next/image';
 
 const DisplayPostInfo = ({ news }) => {
+  console.log(news.description);
   return (
     <div className="py-1 mx-2">
       <div className="bg-sky-50 dark:bg-gray-600 sm:grid sm:grid-cols-8 gap-5 py-6 px-2 rounded-md">
@@ -16,9 +17,14 @@ const DisplayPostInfo = ({ news }) => {
           <h1 className="text-xl font-bold mb-1 text-black dark:text-gray-100">
             {news.title}
           </h1>
-          {/* <p className="text-gray-600 dark:text-sky-100 truncate">
-            {news.description}
-          </p> */}
+          <div
+            className="text-lg text-black dark:text-sky-100 truncate"
+            dangerouslySetInnerHTML={{
+              __html: news.description
+                .replace(/ style="[^"]*"/g, '')
+                .match(/<p[^>]*>(.*?)<\/p>/)[1],
+            }}
+          />
         </div>
       </div>
     </div>
