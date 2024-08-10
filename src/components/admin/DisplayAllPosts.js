@@ -5,7 +5,7 @@ import { MdDeleteForever } from 'react-icons/md';
 import { RiFileEditFill } from 'react-icons/ri';
 import { GoHeading } from 'react-icons/go';
 import Link from 'next/link';
-import { getPosts } from '@/utils/utils';
+import { getPosts, deletePost, handleHeadline } from '@/utils/utils';
 
 const DisplayAllPosts = () => {
   const [posts, setPosts] = useState({
@@ -16,31 +16,6 @@ const DisplayAllPosts = () => {
   useEffect(() => {
     getPosts(setPosts);
   }, []);
-
-  // handle delete
-  const handleDelete = async (item, cb) => {
-    const res = await axios.get(`http://localhost:3000/api/posts/all-posts`);
-    if (res.status === 200) {
-      cb(x => {
-        const updatedData = x.data.filter(y => y._id !== item);
-
-        return {
-          data: updatedData,
-          status: x.status,
-        };
-      });
-    }
-  };
-
-  // handle headline
-
-  const handleHeadline = async id => {
-    const url = 'https://sozoo-backend.vercel.app/news/headline';
-    const res = await axios.post(url, {
-      id: id,
-    });
-    console.log(res.data);
-  };
 
   if (posts.status === 'loading') {
     return (
@@ -77,20 +52,20 @@ const DisplayAllPosts = () => {
                 /> */}
                 <div className="text-2xl flex justify-end gap-2">
                   <div
-                    className="bg-sky-200 px-2 py-2 rounded-full cursor-pointer"
+                    className="bg-sky-500 px-2 py-2 rounded-full cursor-pointer"
                     onClick={() => handleHeadline(item._id)}
                   >
                     <GoHeading />
                   </div>
                   <Link
                     href={`/admin/show-posts/update/${item._id}`}
-                    className="bg-green-200 px-2 py-2 rounded-full cursor-pointer"
+                    className="bg-green-500 px-2 py-2 rounded-full cursor-pointer"
                   >
                     <RiFileEditFill />
                   </Link>
                   <div
-                    className="bg-red-200 px-2 py-2 rounded-full cursor-pointer"
-                    onClick={() => handleDelete(item._id, setPosts)}
+                    className="bg-red-500 px-2 py-2 rounded-full cursor-pointer"
+                    onClick={() => deletePost(setPosts, item._id)}
                   >
                     <MdDeleteForever />
                   </div>

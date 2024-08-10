@@ -1,13 +1,17 @@
 'use client';
-import headlines from '@/data/headlines';
 import Marquee from 'react-fast-marquee';
 import { useState, useEffect } from 'react';
 import Clock from './Clock';
 import Image from 'next/image';
 import BrandLogo from '@/data/images/brandLogo.png';
+import { getHeadlines } from '@/utils/utils';
 
 const MarqueeContainer = () => {
   const [change, setChange] = useState(false);
+  const [headlines, setHeadlines] = useState({
+    data: [],
+    status: 'loading',
+  });
   useEffect(() => {
     const intervalId = setInterval(() => {
       setChange(state => !state);
@@ -16,11 +20,16 @@ const MarqueeContainer = () => {
       clearInterval(intervalId);
     };
   }, []);
+
+  useEffect(() => {
+    getHeadlines(setHeadlines);
+  }, []);
+
   return (
     <>
-      {headlines.length > 0 && (
-        <div className="absolute bottom-2 px-2 flex w-full">
-          <div className="bg-[#06F9B1] flex justify-center rounded-md ">
+      {headlines.data.length > 0 && (
+        <div className="absolute bottom-2 flex w-full ronded-md overflow-hidden">
+          <div className="bg-gray-600 flex justify-center">
             {change ? (
               <Image
                 src={BrandLogo}
@@ -35,8 +44,8 @@ const MarqueeContainer = () => {
           </div>
 
           <Marquee className="bg-[#06f1f944] m-0 p-0" pauseOnHover={true}>
-            {headlines.length &&
-              headlines.map(item => (
+            {headlines.data.length &&
+              headlines.data.map(item => (
                 <h1
                   key={item._id}
                   className="mx-10 text-xl text-white font-semibold"
