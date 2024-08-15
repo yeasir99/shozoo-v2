@@ -66,3 +66,18 @@ export const getCarouselData = async cb => {
     cb(x => ({ ...x, status: 'idle' }));
   }
 };
+
+export const deleteCarouselData = async (id, cb) => {
+  const res = await axios.delete('http://localhost:3000/api/carousel', {
+    headers: {
+      Id: id,
+    },
+  });
+
+  if (res.status === 200) {
+    cb(x => ({
+      ...x,
+      data: x.data.filter(y => y._id !== id),
+    }));
+  }
+};

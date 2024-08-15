@@ -1,8 +1,7 @@
 import { useRef, useEffect } from 'react';
 
 const Slide = props => {
-  const { isCurrent, takeFocus, image, id, title, children } = props;
-
+  const { isCurrent, takeFocus, image, id, title } = props;
   const ref = useRef();
 
   useEffect(() => {
@@ -19,13 +18,12 @@ const Slide = props => {
       aria-labelledby={id}
       className="Slide transition-opacity opacity-100 list-none absolute top-0 left-0 right-0 bottom-0 bg-cover bg-center bg-no-repeat"
       style={{
-        backgroundImage: `url(${image.src})`,
+        backgroundImage: `url(${image.imageurl})`,
       }}
     >
       <div className="flex justify-center items-center h-full">
         <div className="SlideContent text-black  max-w-lg p-5  text-center bg-gray-200/70">
           <h2 id={id}>{title}</h2>
-          {children}
         </div>
       </div>
     </li>
