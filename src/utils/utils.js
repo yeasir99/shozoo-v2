@@ -57,3 +57,12 @@ export const handleHeadline = async id => {
   const url = `http://localhost:3000/api/posts/headline/${id}`;
   await axios.get(url);
 };
+
+export const getCarouselData = async cb => {
+  const res = await axios.get('http://localhost:3000/api/carousel');
+  if (res.status === 200) {
+    cb(x => ({ ...x, data: res.data.posts, status: 'idle' }));
+  } else {
+    cb(x => ({ ...x, status: 'idle' }));
+  }
+};

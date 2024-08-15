@@ -1,5 +1,6 @@
 import connectDB from '../../../../../config/connectDB';
 import Post from '../../../../../models/post';
+import Headline from '../../../../../models/headline';
 
 export const GET = async (request, { params }) => {
   try {
@@ -33,12 +34,20 @@ export const DELETE = async (request, { params }) => {
       });
     }
 
+    const foundedHeadline = await Headline.findOne({ post: post._id });
+    console.log(foundedHeadline);
+
+    if (foundedHeadline) {
+      await foundedHeadline.deleteOne();
+    }
+
     await post.deleteOne();
 
     return new Response(JSON.stringify({ msg: 'Deleted successfully' }), {
       status: 200,
     });
   } catch (error) {
+    console.log(error);
     return new Response('Something went wrong', { status: 500 });
   }
 };

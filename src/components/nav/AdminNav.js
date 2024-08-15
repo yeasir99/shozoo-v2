@@ -12,6 +12,9 @@ const AdminNav = () => {
       <Link href="/admin/headline" className="text-lg font-semibold">
         Headline
       </Link>
+      <Link href="/admin/carousel" className="text-lg font-semibold">
+        Carousel
+      </Link>
     </div>
   );
 };
