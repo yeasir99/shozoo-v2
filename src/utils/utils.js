@@ -68,11 +68,14 @@ export const getCarouselData = async cb => {
 };
 
 export const deleteCarouselData = async (id, cb) => {
-  const res = await axios.delete('http://localhost:3000/api/carousel', {
-    headers: {
-      Id: id,
-    },
-  });
+  const res = await axios.delete(
+    'http://localhost:3000/api/carousel',
+    {
+      headers: {
+        Id: id,
+      },
+    }
+  );
 
   if (res.status === 200) {
     cb(x => ({

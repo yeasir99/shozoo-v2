@@ -5,6 +5,7 @@ import { getPost } from '@/utils/utils';
 import { useParams } from 'next/navigation';
 import { FaHeart, FaMessage } from 'react-icons/fa6';
 import CommentForm from './CommentForm';
+import axios from 'axios';
 
 const DisplayPostDesc = () => {
   const params = useParams();
@@ -25,6 +26,21 @@ const DisplayPostDesc = () => {
       </div>
     );
   }
+
+  console.log(news.data._id);
+
+  const handleLike = async () => {
+    const res = await axios.post(
+      'http://localhost:3000/api/posts/like',
+      {},
+      {
+        headers: {
+          Id: news.data._id,
+        },
+      }
+    );
+    console.log(res);
+  };
 
   return (
     <div className="max-w-[1400px] mx-auto px-2">
@@ -49,7 +65,7 @@ const DisplayPostDesc = () => {
           />
         </div>
         <div className="px-10 py-5 flex gap-5">
-          <FaHeart className="text-2xl cursor-pointer" onClick={() => {}} />
+          <FaHeart className="text-2xl cursor-pointer" onClick={handleLike} />
           <FaMessage
             className="text-2xl cursor-pointer"
             onClick={() => setMessageForm(!messageForm)}
