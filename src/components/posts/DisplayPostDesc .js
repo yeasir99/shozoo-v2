@@ -3,6 +3,8 @@ import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { getPost } from '@/utils/utils';
 import { useParams } from 'next/navigation';
+import { FaHeart, FaMessage } from 'react-icons/fa6';
+import CommentForm from './CommentForm';
 
 const DisplayPostDesc = () => {
   const params = useParams();
@@ -10,6 +12,7 @@ const DisplayPostDesc = () => {
     data: [],
     status: 'loading',
   });
+  const [messageForm, setMessageForm] = useState(false);
 
   useEffect(() => {
     getPost(setNews, params.id);
@@ -45,7 +48,21 @@ const DisplayPostDesc = () => {
             }}
           />
         </div>
-        <div>{/* comment goes here */}</div>
+        <div className="px-10 py-5 flex gap-5">
+          <FaHeart className="text-2xl cursor-pointer" onClick={() => {}} />
+          <FaMessage
+            className="text-2xl cursor-pointer"
+            onClick={() => setMessageForm(!messageForm)}
+          />
+        </div>
+        <div>
+          <CommentForm
+            news={news.data}
+            setPost={setNews}
+            messageForm={messageForm}
+            setMessageForm={setMessageForm}
+          />
+        </div>
       </div>
     </div>
   );

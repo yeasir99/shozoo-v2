@@ -48,7 +48,7 @@ const MarqueeContainer = () => {
               headlines.data.map(item => (
                 <h1
                   key={item._id}
-                  className="mx-10 text-xl text-white font-semibold"
+                  className="mx-10 text-xl text-black font-semibold"
                 >
                   {item.title}
                 </h1>
