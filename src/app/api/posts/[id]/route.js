@@ -35,7 +35,6 @@ export const DELETE = async (request, { params }) => {
     }
 
     const foundedHeadline = await Headline.findOne({ post: post._id });
-    console.log(foundedHeadline);
 
     if (foundedHeadline) {
       await foundedHeadline.deleteOne();

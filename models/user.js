@@ -17,7 +17,8 @@ const userSchema = new Schema(
     },
     image: {
       type: String,
-      default: "https://res.cloudinary.com/doq0sfefc/image/upload/v1723838324/avatar_evqh3d.png"
+      default:
+        'https://res.cloudinary.com/doq0sfefc/image/upload/v1723838324/avatar_evqh3d.png',
     },
     role: {
       type: String,
@@ -25,6 +26,7 @@ const userSchema = new Schema(
     },
     status: {
       type: String,
+      required: true,
     },
   },
   {

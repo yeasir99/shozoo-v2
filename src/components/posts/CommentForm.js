@@ -13,10 +13,10 @@ function CommentForm({ news, setPost, messageForm, setMessageForm }) {
       message: newComment,
       id: news._id,
     });
-    const comments = res.data.comments
-    setPost(x => ({...x, data: {...x.data, comments}}))
-    setNewComment('')
-    setMessageForm(false)
+    const comments = res.data.comments;
+    setPost(x => ({ ...x, data: { ...x.data, comments } }));
+    setNewComment('');
+    setMessageForm(false);
   };
 
   return (
