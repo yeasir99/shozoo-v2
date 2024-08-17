@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 const DisplayPostInfo = ({ news }) => {
-  console.log(news.description);
   return (
     <div className="py-1 mx-2">
       <div className="bg-sky-50 dark:bg-gray-600 sm:grid sm:grid-cols-8 gap-5 py-6 px-2 rounded-md">

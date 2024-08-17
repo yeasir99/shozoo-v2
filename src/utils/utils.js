@@ -30,6 +30,19 @@ export const getFeaturedPosts = async cb => {
   }
 };
 
+export const getCategoryPosts = async (category, cb) => {
+  const res = await axios.get('http://localhost:3000/api/posts/category', {
+    headers: {
+      type: category,
+    },
+  });
+  if (res.status === 200) {
+    cb({ data: res.data.posts, status: 'idle' });
+  } else {
+    cb({ data: [], status: 'idle' });
+  }
+};
+
 export const deletePost = async (cb, id) => {
   const res = await axios.delete(`http://localhost:3000/api/posts/${id}`);
   if (res.status === 200) {
@@ -68,14 +81,11 @@ export const getCarouselData = async cb => {
 };
 
 export const deleteCarouselData = async (id, cb) => {
-  const res = await axios.delete(
-    'http://localhost:3000/api/carousel',
-    {
-      headers: {
-        Id: id,
-      },
-    }
-  );
+  const res = await axios.delete('http://localhost:3000/api/carousel', {
+    headers: {
+      Id: id,
+    },
+  });
 
   if (res.status === 200) {
     cb(x => ({

@@ -1,20 +1,21 @@
 'use client';
 import { useState } from 'react';
 import axios from 'axios';
-import { RxAvatar } from 'react-icons/rx';
+import Image from 'next/image';
 
 function CommentForm({ news, setPost, messageForm }) {
-  const comments = [
-    {
-      _id: '43568723456',
-      name: 'john mike',
-      text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book",
-    },
-  ];
+  const comments = news.comments;
   const [newComment, setNewComment] = useState('');
+
   const handleSubmit = async e => {
     e.preventDefault();
+    const res = await axios.post('http://localhost:3000/api/posts/comment', {
+      message: newComment,
+      id: news._id,
+    });
+    console.log(res);
   };
+
   return (
     <div className=" bg-gray-500 rounded-lg border px-3 py-6 my-4 mx-6">
       <h3 className="font-bold">Discussion</h3>
@@ -45,7 +46,12 @@ function CommentForm({ news, setPost, messageForm }) {
           {comments.map(item => (
             <div className="border rounded-md p-3 ml-3 my-3" key={item._id}>
               <div className="flex gap-3 items-center">
-                <RxAvatar className="text-4xl" />
+                <Image
+                  src={item.avatar}
+                  width={48}
+                  height={48}
+                  className="rounded-full"
+                />
                 <h3 className="font-bold">{item.name}</h3>
               </div>
               <p className=" mt-2">{item.text}</p>

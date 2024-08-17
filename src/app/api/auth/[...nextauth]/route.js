@@ -45,6 +45,7 @@ export const authOptions = {
       const user = await User.findOne({ email: session.user.email });
       session.user.role = user.role;
       session.user.id = user._id;
+      session.user.image = user.image
       return session;
     },
   },

@@ -53,13 +53,15 @@ const postSchema = new Schema(
         },
         text: {
           type: String,
-          required: [true, 'Text is required'],
+          required: true,
         },
         name: {
           type: String,
+          required: true,
         },
         avatar: {
           type: String,
+          required: true,
         },
         date: {
           type: Date,

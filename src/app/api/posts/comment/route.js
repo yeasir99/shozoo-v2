@@ -1,6 +1,7 @@
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '../../auth/[...nextauth]/route';
 import connectDB from '../../../../../config/connectDB';
+import Post from '../../../../../models/post';
 
 export const POST = async request => {
   try {
@@ -16,11 +17,26 @@ export const POST = async request => {
 
     const body = await request.json();
 
-    console.log(body);
+    const findPost = await Post.findById(body.id);
+
+    if (!findPost) {
+      return new Response('Post Not Found', { status: 404 });
+    }
+
+    const commentData = {
+      user: session.user.id,
+      text: body.message,
+      name: session.user.name,
+      avatar: session.user.image,
+    };
+
+    findPost.comments.unshift(commentData);
+
+    await findPost.save();
 
     return new Response(
       JSON.stringify(
-        { msg: 'success' },
+        { comments: findPost.comments },
         {
           status: 200,
         }
