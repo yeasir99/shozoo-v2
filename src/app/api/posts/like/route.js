@@ -33,8 +33,9 @@ export const POST = async request => {
       );
 
       postData.likes = filteredPeople;
-      await postData.save();
-      return new Response(JSON.stringify({ message: 'successfull' }), {
+      const updatedPost = await postData.save();
+
+      return new Response(JSON.stringify({ likes: updatedPost.likes }), {
         status: 200,
       });
     }
@@ -42,8 +43,8 @@ export const POST = async request => {
       user: session.user.id,
     });
 
-    await postData.save();
-    return new Response(JSON.stringify({ message: 'successfull' }), {
+    const updateWithLike = await postData.save();
+    return new Response(JSON.stringify({ likes: updateWithLike.likes }), {
       status: 200,
     });
   } catch (error) {

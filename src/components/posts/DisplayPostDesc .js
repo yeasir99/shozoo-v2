@@ -6,13 +6,18 @@ import { useParams } from 'next/navigation';
 import { FaHeart, FaMessage } from 'react-icons/fa6';
 import CommentForm from './CommentForm';
 import axios from 'axios';
+import { useSession } from 'next-auth/react';
+import Like from '@/components/posts/Like';
 
 const DisplayPostDesc = () => {
+  const session = useSession();
+
   const params = useParams();
   const [news, setNews] = useState({
     data: [],
     status: 'loading',
   });
+
   const [messageForm, setMessageForm] = useState(false);
 
   useEffect(() => {
@@ -27,8 +32,6 @@ const DisplayPostDesc = () => {
     );
   }
 
-  console.log(news.data._id);
-
   const handleLike = async () => {
     const res = await axios.post(
       'http://localhost:3000/api/posts/like',
@@ -39,7 +42,15 @@ const DisplayPostDesc = () => {
         },
       }
     );
-    console.log(res);
+    if (res.status === 200) {
+      setNews(x => ({
+        ...x,
+        data: {
+          ...x.data,
+          likes: res.data.likes,
+        },
+      }));
+    }
   };
 
   return (
@@ -65,7 +76,7 @@ const DisplayPostDesc = () => {
           />
         </div>
         <div className="px-10 py-5 flex gap-5">
-          <FaHeart className="text-2xl cursor-pointer" onClick={handleLike} />
+          <Like handleLike={handleLike} session={session} news={news.data} />
           <FaMessage
             className="text-2xl cursor-pointer"
             onClick={() => setMessageForm(!messageForm)}

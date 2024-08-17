@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
 
-function CommentForm({ news, setPost, messageForm }) {
+function CommentForm({ news, setPost, messageForm, setMessageForm }) {
   const comments = news.comments;
   const [newComment, setNewComment] = useState('');
 
@@ -13,7 +13,10 @@ function CommentForm({ news, setPost, messageForm }) {
       message: newComment,
       id: news._id,
     });
-    console.log(res);
+    const comments = res.data.comments
+    setPost(x => ({...x, data: {...x.data, comments}}))
+    setNewComment('')
+    setMessageForm(false)
   };
 
   return (
@@ -51,6 +54,7 @@ function CommentForm({ news, setPost, messageForm }) {
                   width={48}
                   height={48}
                   className="rounded-full"
+                  alt={item.name}
                 />
                 <h3 className="font-bold">{item.name}</h3>
               </div>
