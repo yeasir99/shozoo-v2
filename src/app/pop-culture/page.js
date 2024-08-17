@@ -1,18 +1,23 @@
 'use client';
 import InfoWrapper from '@/components/posts/InfoWrapper';
-import posts from '@/data/posts';
-import DisplayPostInfo from '@/components/posts/DisplayPostInfo';
-import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { getCategoryPosts } from '@/utils/utils';
+import PostsContainer from '@/components/posts/PostsContainer';
 
 const page = () => {
+  const pathName = usePathname().split('/')[1];
+  const [posts, setPosts] = useState({
+    data: [],
+    status: 'loading',
+  });
+
+  useEffect(() => {
+    getCategoryPosts(pathName, setPosts);
+  }, []);
   return (
     <InfoWrapper>
-      {posts &&
-        posts.map(item => (
-          <Link href={`pop-culture/${item._id}`} key={item._id}>
-            <DisplayPostInfo news={item} />
-          </Link>
-        ))}
+      <PostsContainer posts={posts} path={pathName} />
     </InfoWrapper>
   );
 };
