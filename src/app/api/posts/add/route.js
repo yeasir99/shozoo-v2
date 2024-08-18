@@ -55,11 +55,8 @@ export const POST = async request => {
 
     await newPost.save();
 
-    return new Response(JSON.stringify({ message: 'success' }), {
-      status: 200,
-    });
+    return Response.redirect('http://localhost:3000/admin/create-post/success');
   } catch (error) {
-    console.log(error);
     return new Response('failed to add post', {
       status: 500,
     });
