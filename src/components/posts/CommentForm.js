@@ -20,7 +20,7 @@ function CommentForm({ news, setPost, messageForm, setMessageForm }) {
   };
 
   return (
-    <div className=" bg-gray-500 rounded-lg border px-3 py-6 my-4 mx-6">
+    <div className=" bg-sky-100 dark:bg-gray-700 rounded-lg border px-3 py-6 my-4 mx-6">
       <h3 className="font-bold">Discussion</h3>
       {messageForm && (
         <form onSubmit={handleSubmit}>

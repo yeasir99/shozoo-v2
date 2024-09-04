@@ -8,10 +8,11 @@ import CommentForm from './CommentForm';
 import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import Like from '@/components/posts/Like';
+import { useRouter } from 'next/navigation';
 
 const DisplayPostDesc = () => {
   const session = useSession();
-
+  const router = useRouter();
   const params = useParams();
   const [news, setNews] = useState({
     data: [],
@@ -33,6 +34,9 @@ const DisplayPostDesc = () => {
   }
 
   const handleLike = async () => {
+    if (session.status === 'unauthenticated') {
+      return router.push('/login');
+    }
     const res = await axios.post(
       'http://localhost:3000/api/posts/like',
       {},
@@ -79,7 +83,12 @@ const DisplayPostDesc = () => {
           <Like handleLike={handleLike} session={session} news={news.data} />
           <FaMessage
             className="text-2xl cursor-pointer"
-            onClick={() => setMessageForm(!messageForm)}
+            onClick={() => {
+              if (session.status === 'unauthenticated') {
+                return router.push('/login');
+              }
+              setMessageForm(!messageForm);
+            }}
           />
         </div>
         <div>
@@ -88,6 +97,8 @@ const DisplayPostDesc = () => {
             setPost={setNews}
             messageForm={messageForm}
             setMessageForm={setMessageForm}
+            session={session}
+            router={router}
           />
         </div>
       </div>

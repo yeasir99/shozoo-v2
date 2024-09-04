@@ -56,7 +56,9 @@ export const POST = async request => {
 
     await newPost.save();
 
-    return Response.redirect('http://localhost:3000/admin/carousel/add-item/success')
+    return Response.redirect(
+      'http://localhost:3000/admin/carousel/add-item/success'
+    );
   } catch (error) {
     console.log(error);
     return new Response('failed to add post', {
