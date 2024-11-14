@@ -1,6 +1,5 @@
 'use client';
 import { FaHeart } from 'react-icons/fa6';
-
 const Like = ({ handleLike, session, news }) => {
   let liked = [];
 
