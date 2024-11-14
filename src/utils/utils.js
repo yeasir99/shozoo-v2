@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/all-posts`);
+  const res = await axios.get(`https://www.sozootoday.com/api/posts/all-posts`);
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
   } else {
@@ -12,7 +12,7 @@ export const getPosts = async cb => {
 
 export const getPost = async (cb, id) => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/${id}`);
+  const res = await axios.get(`https://www.sozootoday.com/api/posts/${id}`);
   if (res.status === 200) {
     cb({ data: res.data.post, status: 'idle' });
   } else {
@@ -23,7 +23,7 @@ export const getPost = async (cb, id) => {
 export const getFeaturedPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
   const res = await axios.get(
-    `${process.env.URL_DOMAIN}/api/posts/featured-posts`
+    `https://www.sozootoday.com/api/posts/featured-posts`
   );
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
@@ -60,7 +60,7 @@ export const deletePost = async (cb, id) => {
 };
 
 export const getHeadlines = async cb => {
-  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/headline`);
+  const res = await axios.get(`https://www.sozootoday.com/api/posts/headline`);
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.headlines, status: 'idle' }));
   } else {
@@ -69,12 +69,12 @@ export const getHeadlines = async cb => {
 };
 
 export const handleHeadline = async id => {
-  const url = `${process.env.URL_DOMAIN}/api/posts/headline/${id}`;
+  const url = `https://www.sozootoday.com/api/posts/headline/${id}`;
   await axios.get(url);
 };
 
 export const getCarouselData = async cb => {
-  const res = await axios.get(`${process.env.URL_DOMAIN}/api/carousel`);
+  const res = await axios.get(`https://www.sozootoday.com/api/carousel`);
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.posts, status: 'idle' }));
   } else {
@@ -83,7 +83,7 @@ export const getCarouselData = async cb => {
 };
 
 export const deleteCarouselData = async (id, cb) => {
-  const res = await axios.delete(`${process.env.URL_DOMAIN}/api/carousel`, {
+  const res = await axios.delete(`https://www.sozootoday.com/api/carousel`, {
     headers: {
       Id: id,
     },
