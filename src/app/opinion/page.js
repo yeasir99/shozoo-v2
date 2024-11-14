@@ -1,3 +1,4 @@
+'use client';
 import InfoWrapper from '@/components/posts/InfoWrapper';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
