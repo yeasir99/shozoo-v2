@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get('http://localhost:3000/api/posts/all-posts');
+  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/all-posts`);
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
   } else {
@@ -12,7 +12,7 @@ export const getPosts = async cb => {
 
 export const getPost = async (cb, id) => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`http://localhost:3000/api/posts/${id}`);
+  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/${id}`);
   if (res.status === 200) {
     cb({ data: res.data.post, status: 'idle' });
   } else {
@@ -22,7 +22,9 @@ export const getPost = async (cb, id) => {
 
 export const getFeaturedPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get('http://localhost:3000/api/posts/featured-posts');
+  const res = await axios.get(
+    `${process.env.URL_DOMAIN}/api/posts/featured-posts`
+  );
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
   } else {
@@ -31,7 +33,7 @@ export const getFeaturedPosts = async cb => {
 };
 
 export const getCategoryPosts = async (category, cb) => {
-  const res = await axios.get('http://localhost:3000/api/posts/category', {
+  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/category`, {
     headers: {
       type: category,
     },
@@ -44,7 +46,7 @@ export const getCategoryPosts = async (category, cb) => {
 };
 
 export const deletePost = async (cb, id) => {
-  const res = await axios.delete(`http://localhost:3000/api/posts/${id}`);
+  const res = await axios.delete(`${process.env.URL_DOMAIN}/api/posts/${id}`);
   if (res.status === 200) {
     cb(x => {
       const updatedData = x.data.filter(y => y._id !== id);
@@ -58,7 +60,7 @@ export const deletePost = async (cb, id) => {
 };
 
 export const getHeadlines = async cb => {
-  const res = await axios.get('http://localhost:3000/api/posts/headline');
+  const res = await axios.get(`${process.env.URL_DOMAIN}/api/posts/headline`);
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.headlines, status: 'idle' }));
   } else {
@@ -67,12 +69,12 @@ export const getHeadlines = async cb => {
 };
 
 export const handleHeadline = async id => {
-  const url = `http://localhost:3000/api/posts/headline/${id}`;
+  const url = `${process.env.URL_DOMAIN}/api/posts/headline/${id}`;
   await axios.get(url);
 };
 
 export const getCarouselData = async cb => {
-  const res = await axios.get('http://localhost:3000/api/carousel');
+  const res = await axios.get(`${process.env.URL_DOMAIN}/api/carousel`);
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.posts, status: 'idle' }));
   } else {
@@ -81,7 +83,7 @@ export const getCarouselData = async cb => {
 };
 
 export const deleteCarouselData = async (id, cb) => {
-  const res = await axios.delete('http://localhost:3000/api/carousel', {
+  const res = await axios.delete(`${process.env.URL_DOMAIN}/api/carousel`, {
     headers: {
       Id: id,
     },
