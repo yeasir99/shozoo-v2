@@ -3,7 +3,7 @@ import { FaHeart } from 'react-icons/fa6';
 const Like = ({ handleLike, session, news }) => {
   let liked = [];
 
-  if (news.likes.length > 0) {
+  if (news.likes.length > 0 && session.data) {
     liked = news.likes.filter(item => item.user === session.data.user.id);
   }
 

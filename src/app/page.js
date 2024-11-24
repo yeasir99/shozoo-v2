@@ -1,4 +1,4 @@
-import CarouselContainer from '@/components/Carousel/CarouselContainer';
+import ConditionalRender from '@/components/ConditionalRender';
 import Footer from '@/components/Footer';
 import Nav from '@/components/nav/Nav';
 import MarqueeContainer from '@/components/marquee/MarqueeContainer';
@@ -14,7 +14,7 @@ export default function Home() {
             <Nav />
           </div>
         </div>
-        <CarouselContainer />
+        <ConditionalRender />
         <MarqueeContainer />
       </div>
       <div className="bg-sky-50 dark:bg-black">
