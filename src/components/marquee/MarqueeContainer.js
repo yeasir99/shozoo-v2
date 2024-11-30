@@ -12,6 +12,7 @@ const MarqueeContainer = () => {
     data: [],
     status: 'loading',
   });
+  console.log(headlines);
   useEffect(() => {
     const intervalId = setInterval(() => {
       setChange(state => !state);

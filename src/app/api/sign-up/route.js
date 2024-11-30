@@ -55,7 +55,7 @@ export const POST = async request => {
         </tr>
         <tr>
             <td align="center" style="padding: 20px 0;">
-                <a href="http://localhost:3000/verify/${res._id.toString()}" style="background-color: #28a745; color: #ffffff; padding: 10px 20px; cursor: pointer; text-decoration: none; font-size: 16px; border-radius: 5px;">Confirm Your Email</a>
+                <a href="https://www.sozootoday.com/verify/${res._id.toString()}" style="background-color: #28a745; color: #ffffff; padding: 10px 20px; cursor: pointer; text-decoration: none; font-size: 16px; border-radius: 5px;">Confirm Your Email</a>
             </td>
         </tr>
         <tr>
@@ -75,9 +75,7 @@ export const POST = async request => {
 
     await transporter.sendMail(mailOptions);
 
-    return Response.redirect(
-      'http://localhost:3000/sign-up/email-confirmation'
-    );
+    return Response.redirect('/sign-up/email-confirmation');
   } catch (error) {
     return new Response('Failed to grab form Data', {
       status: 500,
