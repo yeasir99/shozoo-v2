@@ -75,7 +75,9 @@ export const POST = async request => {
 
     await transporter.sendMail(mailOptions);
 
-    return Response.redirect('/sign-up/email-confirmation');
+    return Response.redirect(
+      'https://www.sozootoday.com/sign-up/email-confirmation'
+    );
   } catch (error) {
     return new Response('Failed to grab form Data', {
       status: 500,
