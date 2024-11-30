@@ -13,7 +13,7 @@ const page = () => {
   const pathName = usePathname().split('/')[2];
 
   const verifyUser = async () => {
-    const res = await axios.get('http://localhost:3000/api/sign-up', {
+    const res = await axios.get('https://www.sozootoday.com//api/sign-up', {
       headers: {
         Id: pathName,
       },
