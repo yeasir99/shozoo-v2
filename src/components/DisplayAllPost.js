@@ -10,6 +10,7 @@ const DisplayAllPost = () => {
     status: 'idle',
   });
 
+
   useEffect(() => {
     getPosts(setPosts);
   }, []);

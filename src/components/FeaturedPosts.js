@@ -9,7 +9,6 @@ const FeaturedPosts = () => {
     data: [],
     status: 'idle',
   });
-
   useEffect(() => {
     getFeaturedPosts(setPosts);
   }, []);

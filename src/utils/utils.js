@@ -94,3 +94,22 @@ export const deleteCarouselData = async (id, cb) => {
     }));
   }
 };
+
+
+export const getViralPosts = async cb => {
+  cb(prev => ({ ...prev, status: 'loading' }));
+  
+  try {
+    const res = await axios.get(`/api/posts/all-posts`);
+    
+    if (res.status === 200) {
+      const viralPosts = res.data.posts.filter(post => post.viralPost === true);
+      cb({ data: viralPosts, status: 'idle' });
+    } else {
+      cb({ data: [], status: 'idle' });
+    }
+  } catch (error) {
+    console.error('Error fetching viral posts:', error);
+    cb({ data: [], status: 'idle' });
+  }
+};

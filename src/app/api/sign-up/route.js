@@ -7,6 +7,7 @@ export const POST = async request => {
   connectDB();
   try {
     const formData = await request.formData();
+console.log("LINE AT 10 sign-up api", formData);
 
     const hashedPass = await bcrypt.hash(formData.get('password'), 10);
 
@@ -79,8 +80,9 @@ export const POST = async request => {
       'https://www.sozootoday.com/sign-up/email-confirmation'
     );
   } catch (error) {
-    return new Response('Failed to grab form Data', {
+    return new Response('Failed to grab form Data', error, {
       status: 500,
+
     });
   }
 };

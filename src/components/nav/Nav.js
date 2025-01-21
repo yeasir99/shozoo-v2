@@ -46,12 +46,12 @@ const Nav = () => {
 				<ThemeSwitch />
 				{menuOpen ? (
 					<MdOutlineClose
-						className='text-2xl text-black dark:text-white cursor-pointer'
+						className='text-2xl  cursor-pointer'
 						onClick={handleMenu}
 					/>
 				) : (
 					<MdOutlineMenu
-						className='text-2xl text-black dark:text-white cursor-pointer'
+						className='text-2xl  cursor-pointer'
 						onClick={handleMenu}
 					/>
 				)}

@@ -46,7 +46,7 @@ const Footer = () => {
             <a href="https://youtube.com/@sozootoday" target="_blank">
               <FaTwitter className="text-white dark:text-white text-3xl" />
             </a>
-            <a href="https://youtube.com/@sozootoday" target="_blank">
+            <a href="https://x.com/@sozootoday" target="_blank">
               <FaYoutube className="text-white dark:text-white text-3xl" />
             </a>
             <a
