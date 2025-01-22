@@ -81,9 +81,7 @@ const SumMenu = ({ onClose }) => {
                       <a
                         className="hover:scale-[1.05] transition-transform text-sm md:text-lg font-bold leading-6 no-underline mb-5 block duration-150  ease-in-out  font-sans"
                         role="presentation"
-                        href={`/category/${category.url
-                          .toLowerCase()
-                          .replace(/ /g, "-")}/?ref=nav_links`}
+                        href={category.url}
                       >
                         {category.title}
                       </a>
@@ -118,7 +116,7 @@ const SumMenu = ({ onClose }) => {
         </div>
       </div>
 
-      <div className="mx-auto max-w-[75%] mb-11">
+      <div className="mx-auto max-w-[75%] mb-11 hidden md:block">
         <div className="mb-2 lg:mb-[30px] lg:text-[22px] text-base lg:text-[#e0dede] text-white font-bold">
           <div className="hidden lg:block max-w-2xl mb-9">
             <div className="flex pt-4 pr-4 pb-2 flex-1 items-center">
