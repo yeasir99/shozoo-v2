@@ -59,7 +59,7 @@ const SumMenu = ({ onClose }) => {
       >
         <div className="mb-8">
           <div className="pt-[30px]">
-            <div className="leading-tight flex items-center mb-[30px]">
+            <div className=" flex justify-end md:justify-start items-center  mb-[30px]  w-full mr-[20px] text-xl md:text-md space-x-2 px-4">
               <span>
                 <FaUser className="w-[18px] h-[18px] text-white" />
               </span>
@@ -68,18 +68,18 @@ const SumMenu = ({ onClose }) => {
               </button>
             </div>
             <div className="flex  md:flex-col lg:flex-row gap-10">
-              <div className="relative flex-1 w-full lg:w-1/2 pr-[34px] ">
-                <div className="flex items-center mb-[14px]">
-                  <h2 className="tracking-[.41em] text-[13px] font-bold text-black dark:text-white mr-2">
+              <div className="relative flex-1 w-full lg:w-1/2  ">
+                <div className="hidden md:flex items-center mb-[14px]">
+                  <h2 className="tracking-[.41em] text-[13px] font-bold text-black dark:text-white mr-2 ">
                     CATEGORIES
                   </h2>
                   <span className="h-[1px] bg-white flex-1"></span>
                 </div>
-                <div className="flex flex-wrap justify-between category_items text-black dark:text-white">
+                <div className="flex flex-col md:flex-row flex-wrap items-center md:items-start justify-between w-full text-black dark:text-white ">
                   {categories.map((category) => (
                     <div key={category.id} className="w-1/3">
                       <a
-                        className="hover:scale-[1.05] transition-transform text-sm md:text-lg font-bold leading-6 no-underline mb-5 block duration-150  ease-in-out  font-sans"
+                        className="hover:scale-[1.05] transition-transform text-xl  md:text-lg font-bold leading-6 no-underline mb-5 block duration-150  ease-in-out  font-sans"
                         role="presentation"
                         href={category.url}
                       >
