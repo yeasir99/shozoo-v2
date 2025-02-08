@@ -9,6 +9,11 @@ const page = () => {
     email: "",
     password: "",
   });
+  const [error,setError] = useState({
+    name: "",
+    email: "",
+    password: '',
+  })
 
   const handleChange = (e) => {
     setCredentials((prevState) => ({
@@ -16,6 +21,14 @@ const page = () => {
       [e.target.name]: e.target.value,
     }));
   };
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if(error.name || error.password || error.email){
+      return;
+    }
+
+  }
   return (
     <div>
       <div className="bg-blue-600 dark:bg-black">
@@ -30,8 +43,7 @@ const page = () => {
           </h1>
           <form
             className="w-full max-w-md m-auto"
-            action="/api/sign-up"
-            method="post"
+            onSubmit={handleSubmit}
           >
             <input
               type="text"

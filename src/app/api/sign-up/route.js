@@ -1,51 +1,51 @@
-import connectDB from "../../../../config/connectDB";
-import User from "../../../../models/user";
-import bcrypt from "bcryptjs";
-import NodeMailer from "nodemailer";
+import connectDB from '../../../../config/connectDB';
+import User from '../../../../models/user';
+import bcrypt from 'bcryptjs';
+import NodeMailer from 'nodemailer';
+import { redirect } from 'next/navigation';
 
-export const POST = async (request) => {
+export const POST = async request => {
   connectDB();
   try {
     const formData = await request.formData();
     // console.log("LINE AT 10 sign-up api", formData);
 
-    const hashedPass = await bcrypt.hash(formData.get("password"), 10);
+    const hashedPass = await bcrypt.hash(formData.get('password'), 10);
 
-    const name = formData.get("name");
-    const email = formData.get("email");
+    const name = formData.get('name');
+    const email = formData.get('email');
 
     const userData = {
       name,
       email,
       password: hashedPass,
-      role: "user",
-      status: "pending",
+      role: 'user',
+      status: 'pending',
     };
-    console.log("LINE AT 10 sign-up api", userData);
+    console.log('LINE AT 10 sign-up api', userData);
 
     const res = await User.create(userData);
-    console.log("LINE AT 27", res);
+    console.log('LINE AT 27', res);
 
     const transporter = NodeMailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
+      host: 'mail.privateemail.com',
+      port: 465, // SSL port
+      secure: true, // Use true for port 465,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
     });
 
-        const mailOptions = {
-          from: {
-            name: 'Sozoo Today',
-            address: process.env.SMTP_USER,
-          },
-          to: email,
-          subject: 'Send email from nodemailer',
-          text: 'test email',
-          html: `<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
+    const mailOptions = {
+      from: {
+        name: 'Sozoo Today',
+        address: process.env.SMTP_USER,
+      },
+      to: email,
+      subject: 'Send email from nodemailer',
+      text: 'test email',
+      html: `<body style="font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0;">
         <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; background-color: #ffffff; padding: 20px;">
             <tr>
                 <td style="padding: 20px 0; color: #333333;">
@@ -77,69 +77,45 @@ export const POST = async (request) => {
             </tr>
         </table>
     </body>`,
-        };
+    };
 
     await transporter.sendMail(mailOptions);
-
-    return  new Response.redirect(
-      'https://www.sozootoday.com/sign-up/email-confirmation'
-    );
-    } catch(errors){
-      return new Response(
-        JSON.stringify({message:"Server Error", errors: errors} , {
-          status: errors.status, 
-
-        })
+  } catch (errors) {
+    console.log(errors);
+    return new Response(
+      JSON.stringify(
+        { message: 'Server Error', errors: errors },
+        {
+          status: errors.status,
+        }
       )
-    }
-  //   return new Response(
-  //     JSON.stringify({ message: "User created successfully", user: res }),
-  //     {
-  //       status: 201,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // } catch (error) {
-  //   console.error("Signup error:", error);
-  //   return new Response(
-  //     JSON.stringify({
-  //       message: "Failed to create user",
-  //       error: error.message,
-  //     }),
-  //     {
-  //       status: 500,
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //     }
-  //   );
-  // }
+    );
+  }
+  return redirect('https://www.sozootoday.com/sign-up/email-confirmation');
 };
 
-export const GET = async (request) => {
+export const GET = async request => {
   try {
     await connectDB();
     const requestHeaders = new Headers(request.headers);
 
-    const userId = requestHeaders.get("Id");
+    const userId = requestHeaders.get('Id');
 
     const userToVerify = await User.findById(userId);
 
     if (!userToVerify) {
-      return new Response("User Not Found", {
+      return new Response('User Not Found', {
         status: 404,
       });
     }
 
-    userToVerify.status = "verified";
+    userToVerify.status = 'verified';
 
     await userToVerify.save();
-    return new Response("User verified successfully", {
+    return new Response('User verified successfully', {
       status: 200,
     });
   } catch (error) {
-    return new Response("Something Went Wrong", { status: 500 });
+    return new Response('Something Went Wrong', { status: 500 });
   }
 };

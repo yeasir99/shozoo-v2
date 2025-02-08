@@ -12,12 +12,13 @@ import { socials } from '@/data/social';
 import { useEffect, useState } from 'react';
 import { getPosts, getViralPosts } from '@/utils/utils';
 
-const SumMenu = ({ onClose }) => {
+const SumMenu = ({ onClose, session, status }) => {
+  const clasess =
+    'flex flex-row items-center justify-center py-1 capitalize font-semibold hover:font-bold';
   const [posts, setPosts] = useState({
     data: [],
     status: 'idle',
   });
-console.log(posts.data)
   useEffect(() => {
     getViralPosts(setPosts);
     // getPosts(setPosts);
@@ -58,16 +59,37 @@ console.log(posts.data)
         >
           <div className="mb-8">
             <div className="pt-[30px]">
-              <div className=" flex justify-end md:justify-start items-center  mb-[30px]  w-full mr-[20px] text-xl md:text-md space-x-2 px-4">
-                <span>
-                  <FaUser className="w-[18px] h-[18px] text-white" />
-                </span>
-                <Link href="/login">
-                  <button type="button" className="pl-3 text-white">
-                    Sign In
-                  </button>
-                </Link>
-              </div>
+              {status === 'authenticated' ? (
+                <>
+                  <div className="flex justify-end md:justify-start items-center  mb-2  w-full mr-[20px] text-xl md:text-md space-x-2 px-4">
+                  <Link
+                    href={session?.user.role === 'user' ? '/user' : '/admin'}
+                  >
+                    Dashboard
+                  </Link>
+                  </div>
+                  <div
+                    className=" flex justify-end md:justify-start items-center  mb-[30px]  w-full mr-[20px] text-xl md:text-md space-x-2 px-4 cursor-pointer"
+                    onClick={() => signOut()}
+                  >
+                    Logout
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className=" flex justify-end md:justify-start items-center  mb-[30px]  w-full mr-[20px] text-xl md:text-md space-x-2 px-4">
+                    <span>
+                      <FaUser className="w-[18px] h-[18px] text-white" />
+                    </span>
+                    <Link href="/login">
+                      <button type="button" className="pl-3 text-white">
+                        Sign In
+                      </button>
+                    </Link>
+                  </div>
+                </>
+              )}
+
               <div className="flex  md:flex-col lg:flex-row gap-10">
                 <div className="relative flex-1 w-full lg:w-1/2  ">
                   <div className="hidden md:flex items-center mb-[14px]">
@@ -123,7 +145,7 @@ console.log(posts.data)
             <div className="hidden lg:block max-w-2xl mb-9">
               <div className="flex pt-4 pr-4 pb-2 flex-1 items-center">
                 <span className="pr-3 lg:uppercase text-black dark:text-white text-lg lg:text-[13px] lg:tracking-[4px] font-bold leading-[20px]">
-                  Our Shows
+                  Viram posts
                 </span>
                 <span className="bg-[#ffec41] h-[2px] flex-1 hidden lg:inline-block"></span>
               </div>
@@ -260,7 +282,7 @@ console.log(posts.data)
           </div>
           <Link
             className="flex mt-4 hover:scale-105 transition-transform float-right text-xl leading-4 pr-2"
-            href="/all_shows"
+            href="/posts"
           >
             <div className="pr-2  ">View All</div>
             <FaArrowRight className="w-[17] h-[13px]  " />

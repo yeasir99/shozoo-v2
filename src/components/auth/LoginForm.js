@@ -14,14 +14,18 @@ const LoginForm = () => {
   const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+
     if (!credentials.email || !credentials.password) return;
     try {
+      console.log(credentials)
       const res = await signIn("credentials", {
         ...credentials,
         redirect: false,
       });
+      console.log(res)
       if (res.ok) {
-        router.replace("/");
+        router.push("/");
       }
     } catch (error) {
       console.log(error);
@@ -39,11 +43,11 @@ const LoginForm = () => {
       <IoMdPerson  className="absolute right-2 top-2 z-10 text-white"/>
         <input
           type="text"
-          id="username"
-          name="username"
+          id="email"
+          name="email"
           className="w-full rounded-full  border-white bg-transparent focus:outline-none focus:border-white focus:ring-0 placeholder:text-white"
           onChange={handleChange}
-          placeholder="Username"
+          placeholder="email"
           required
         />
       </div>
@@ -95,9 +99,9 @@ const LoginForm = () => {
       </label>
     
 
-      <a href="#" className=" text-white">
+      {/* <a href="#" className=" text-white">
         Forgot password?
-      </a>
+      </a> */}
     </div>
       </div>
       <div className="flex mx-auto w-full">
