@@ -11,6 +11,7 @@ import { categories } from '@/data/categories';
 import { socials } from '@/data/social';
 import { useEffect, useState } from 'react';
 import { getPosts, getViralPosts } from '@/utils/utils';
+import { useSession, signOut } from 'next-auth/react';
 
 const SumMenu = ({ onClose, session, status }) => {
   const clasess =

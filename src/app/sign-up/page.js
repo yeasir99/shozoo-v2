@@ -2,6 +2,8 @@
 import Nav from "@/components/nav/Nav";
 import Footer from "@/components/Footer";
 import { useState } from "react";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const page = () => {
   const [credentials, setCredentials] = useState({
@@ -21,13 +23,16 @@ const page = () => {
       [e.target.name]: e.target.value,
     }));
   };
-
+const router = useRouter()
   const handleSubmit = async e => {
     e.preventDefault();
     if(error.name || error.password || error.email){
       return;
     }
-
+    const res = await axios.post('/api/sign-up', credentials)
+    if(res.status === 200){
+      router.push('/sign-up/email-confirmation')
+    }
   }
   return (
     <div>

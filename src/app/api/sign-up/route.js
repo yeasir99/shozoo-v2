@@ -7,13 +7,12 @@ import { redirect } from 'next/navigation';
 export const POST = async request => {
   connectDB();
   try {
-    const formData = await request.formData();
-    // console.log("LINE AT 10 sign-up api", formData);
+    const body = await request.json()
 
-    const hashedPass = await bcrypt.hash(formData.get('password'), 10);
+    const hashedPass = await bcrypt.hash(body.password, 10);
 
-    const name = formData.get('name');
-    const email = formData.get('email');
+    const name = body.name;
+    const email = body.email;
 
     const userData = {
       name,
@@ -91,7 +90,15 @@ export const POST = async request => {
       )
     );
   }
-  return redirect('https://www.sozootoday.com/sign-up/email-confirmation');
+  // return redirect('https://www.sozootoday.com/sign-up/email-confirmation');
+  return new Response(
+    JSON.stringify(
+      { message: 'successfull' },
+      {
+        status: 200,
+      }
+    )
+  );
 };
 
 export const GET = async request => {
