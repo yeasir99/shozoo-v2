@@ -64,9 +64,9 @@ const SumMenu = ({ onClose, session, status }) => {
                 <>
                   <div className="flex justify-end md:justify-start items-center  mb-2  w-full mr-[20px] text-xl md:text-md space-x-2 px-4">
                   <Link
-                    href={session?.user.role === 'user' ? '/user' : '/admin'}
+                    href={session?.user.role === 'user' ? '/' : '/admin'}
                   >
-                    Dashboard
+                    {session?.user.role === 'user' ? 'Home' : 'Dashboard'}
                   </Link>
                   </div>
                   <div
