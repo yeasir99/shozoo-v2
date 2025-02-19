@@ -4,7 +4,7 @@ import Headline from '../../../../../models/headline';
 export const GET = async () => {
   try {
     await connectDB();
-    const headlines = await Headline.find({});
+    const headlines = await Headline.find({}).lean();
     return new Response(JSON.stringify({ headlines }), {
       status: 200,
       headers: {
