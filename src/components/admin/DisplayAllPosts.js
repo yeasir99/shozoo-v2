@@ -1,4 +1,5 @@
 'use client';
+export const dynamic = 'force-static';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { MdDeleteForever } from 'react-icons/md';
