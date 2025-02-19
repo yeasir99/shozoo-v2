@@ -5,7 +5,7 @@ export const GET = async () => {
   try {
     await connectDB();
 
-    const posts = await Post.find({}).lean().exec();
+    const posts = await Post.find({});
 
     return new Response(JSON.stringify({ posts }), {
       status: 200,
