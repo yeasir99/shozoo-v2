@@ -55,7 +55,7 @@ export const POST = async request => {
 
     await newPost.save();
 
-    return Response.redirect('https://www.sozootoday.com/admin/create-post/success');
+    return Response.redirect(`${process.env.URL_DOMAIN}/admin/create-post/success`);
   } catch (error) {
     return new Response('failed to add post', {
       status: 500,
