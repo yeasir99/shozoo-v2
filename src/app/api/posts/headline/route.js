@@ -5,6 +5,7 @@ export const GET = async () => {
   try {
     await connectDB();
     const headlines = await Headline.find({}).lean();
+    console.log(headlines)
     return new Response(JSON.stringify({ headlines }), {
       status: 200,
       headers: {
