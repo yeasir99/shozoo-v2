@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { getHeadlines } from '@/utils/utils';
-export const dynamic = "force-dynamic";
 
 const page = () => {
   const [headlines, setHeadlines] = useState({

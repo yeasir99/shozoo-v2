@@ -1,4 +1,3 @@
-export const dynamic = "force-dynamic";
 import DisplayAllPosts from '@/components/admin/DisplayAllPosts';
 
 const page = () => {

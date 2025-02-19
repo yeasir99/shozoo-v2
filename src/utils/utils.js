@@ -1,10 +1,14 @@
 import axios from 'axios';
 
-export const dynamic = "force-dynamic";
-
 export const getPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`/api/posts/all-posts`);
+  const res = await axios.get(`/api/posts/all-posts`, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
+  });
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
   } else {
@@ -14,7 +18,13 @@ export const getPosts = async cb => {
 
 export const getPost = async (cb, id) => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`/api/posts/${id}`);
+  const res = await axios.get(`/api/posts/${id}`, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
+  });
   if (res.status === 200) {
     cb({ data: res.data.post, status: 'idle' });
   } else {
@@ -24,7 +34,13 @@ export const getPost = async (cb, id) => {
 
 export const getFeaturedPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`/api/posts/featured-posts`);
+  const res = await axios.get(`/api/posts/featured-posts`, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
+  });
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
   } else {
@@ -60,7 +76,13 @@ export const deletePost = async (cb, id) => {
 };
 
 export const getHeadlines = async cb => {
-  const res = await axios.get(`/api/posts/headline`);
+  const res = await axios.get(`/api/posts/headline`, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
+  });
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.headlines, status: 'idle' }));
   } else {
@@ -70,11 +92,23 @@ export const getHeadlines = async cb => {
 
 export const handleHeadline = async id => {
   const url = `/api/posts/headline/${id}`;
-  await axios.get(url);
+  await axios.get(url, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
+  });
 };
 
 export const getCarouselData = async cb => {
-  const res = await axios.get(`/api/carousel`);
+  const res = await axios.get(`/api/carousel`, {
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      Pragma: 'no-cache',
+      Expires: '0',
+    },
+  });
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.posts, status: 'idle' }));
   } else {
@@ -102,7 +136,13 @@ export const getViralPosts = async cb => {
   cb(prev => ({ ...prev, status: 'loading' }));
   
   try {
-    const res = await axios.get(`/api/posts/all-posts`);
+    const res = await axios.get(`/api/posts/all-posts`, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      },
+    });
     
     if (res.status === 200) {
       const viralPosts = res.data.posts.filter(post => post.viralPost === true);
