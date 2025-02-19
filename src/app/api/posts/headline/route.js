@@ -7,6 +7,10 @@ export const GET = async () => {
     const headlines = await Headline.find({});
     return new Response(JSON.stringify({ headlines }), {
       status: 200,
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+        'Content-Type': 'application/json',
+      },
     });
   } catch (error) {
     return new Response('Something went wrong', { status: 500 });
