@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getPosts = async cb => {
   cb(x => ({ ...x, status: 'loading' }));
-  const res = await axios.get(`/api/posts/all-posts`);
+  const res = await axios.get(`/api/posts/all-posts`,{ cache: 'no-store' });
   if (res.status === 200) {
     cb({ data: res.data.posts, status: 'idle' });
   } else {
@@ -58,7 +58,7 @@ export const deletePost = async (cb, id) => {
 };
 
 export const getHeadlines = async cb => {
-  const res = await axios.get(`/api/posts/headline`);
+  const res = await axios.get(`/api/posts/headline`, { cache: 'no-store' });
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.headlines, status: 'idle' }));
   } else {
@@ -68,11 +68,11 @@ export const getHeadlines = async cb => {
 
 export const handleHeadline = async id => {
   const url = `/api/posts/headline/${id}`;
-  await axios.get(url);
+  await axios.get(url, { cache: 'no-store' });
 };
 
 export const getCarouselData = async cb => {
-  const res = await axios.get(`/api/carousel`);
+  const res = await axios.get(`/api/carousel`, { cache: 'no-store' });
   if (res.status === 200) {
     cb(x => ({ ...x, data: res.data.posts, status: 'idle' }));
   } else {
