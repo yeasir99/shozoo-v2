@@ -10,6 +10,8 @@ export const GET = async request => {
 
     const path = request.nextUrl.searchParams.get('path')
 
+    console.log(path)
+
     if(path){
       revalidatePath(path)
       return new Response(JSON.stringify({ posts }), {
