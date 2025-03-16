@@ -1,11 +1,22 @@
 import connectDB from '../../../../../config/connectDB';
 import Post from '../../../../../models/post';
+import {revalidatePath} from 'next/cache'
 
-export const GET = async () => {
+export const GET = async request => {
   try {
     await connectDB();
 
     const posts = await Post.find({});
+
+    const path = request.nextUrl.searchParams.get('path')
+
+    if(path){
+      revalidatePath(path)
+      return new Response(JSON.stringify({ posts }), {
+        status: 200
+      });
+    }
+
 
     return new Response(JSON.stringify({ posts }), {
       status: 200,
