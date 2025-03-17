@@ -1,11 +1,20 @@
 import connectDB from '../../../../../config/connectDB';
 import Headline from '../../../../../models/headline';
+import {revalidatePath} from 'next/cache'
 
-export const GET = async () => {
+export const GET = async request => {
   try {
     await connectDB();
     const headlines = await Headline.find({}).lean().exec();
-    console.log(headlines)
+    const path = request.nextUrl.searchParams.get('path')
+
+    if(path){
+          revalidatePath(path)
+          return new Response(JSON.stringify({ headlines }), {
+            status: 200
+          });
+        }
+
     return new Response(JSON.stringify({ headlines }), {
       status: 200,
       headers: {
