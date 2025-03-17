@@ -5,7 +5,7 @@ import { authOptions } from '../auth/[...nextauth]/route';
 import cloudinary from '../../../../config/cloudinary';
 import {revalidatePath} from 'next/cache'
 
-export const GET = async () => {
+export const GET = async request => {
   try {
     await connectDB();
 
