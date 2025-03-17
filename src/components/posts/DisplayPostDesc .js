@@ -38,7 +38,7 @@ const DisplayPostDesc = () => {
       return router.push('/login');
     }
     const res = await axios.post(
-      'http://localhost:3000/api/posts/like',
+      '/api/posts/like',
       {},
       {
         headers: {

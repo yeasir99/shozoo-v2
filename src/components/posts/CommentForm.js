@@ -9,7 +9,7 @@ function CommentForm({ news, setPost, messageForm, setMessageForm }) {
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:3000/api/posts/comment', {
+    const res = await axios.post('/api/posts/comment', {
       message: newComment,
       id: news._id,
     });
